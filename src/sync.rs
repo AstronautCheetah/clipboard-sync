@@ -251,7 +251,9 @@ fn await_change(clipboards: &Vec<Box<dyn Clipboard>>) -> MyResult<String> {
                 continue;
             }
             let new = c.get()?;
-            if new != start {
+            // Empty means no text on that clipboard (e.g. an image was copied): not a change
+            // to share, or it would replace the image with old text everywhere.
+            if !new.is_empty() && new != start {
                 log::info!("clipboard updated from display {}", c.display());
                 log::sensitive!(log::info, "clipboard contents: '{}'", new);
                 return Ok(new);
