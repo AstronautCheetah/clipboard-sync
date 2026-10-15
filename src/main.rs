@@ -16,7 +16,9 @@ mod clipboard;
 mod error;
 mod log;
 mod mustatex;
+mod owner;
 mod sync;
+mod watch;
 
 fn main() {
     let args = Args::parse();
